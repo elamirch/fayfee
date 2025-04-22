@@ -13,4 +13,3 @@ authors = ["ElAmir"]
 colour = "0.6.0"
 newsapi = {path = "./newsapi"}
 dotenv = "0.15.0"
-eframe = "0.14.0"

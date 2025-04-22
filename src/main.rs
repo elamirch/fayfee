@@ -1,24 +1,30 @@
-use std::error::Error;
-use colour::{ yellow , green };
-use newsapi::{Response, get_articles};
+use colour::{green, yellow};
 use dotenv::dotenv;
-use eframe::*;
+use newsapi::{get_articles, Response};
+use std::error::Error;
 
-fn main() -> Result<(), Box<dyn Error>>{
+fn main() -> Result<(), Box<dyn Error>> {
     dotenv().ok();
 
-    let url = format!("{}{}", "https://content.guardianapis.com/search?api-key=", std::env::var("API_KEY")?);
-    let articles = get_articles(&url)?;
-    
-    render_articles(&articles);
+    let url = format!(
+        "{}?q={}&from={}&sortBy={}&apiKey={}",
+        std::env::var("API_ENDPOINT")?,
+        "Apple",
+        "2025-04-20",
+        "popularity",
+        std::env::var("API_KEY")?
+    );
+    println!("{}", url);
+    let response = get_articles(&url)?;
+    render_articles(&response);
     Ok(())
 }
 
-fn render_articles(articles: &Response) {
-    for i in &articles.response.results {
-        yellow!(" > {}\n", i.webTitle);
-        green!(" . {}\n\n", i.webUrl);
-
+fn render_articles(response: &Response) {
+    for article in &response.articles {
+        yellow!(" > {}\n", article.title);
+        green!(" . {}\n\n", article.description
+                                .as_ref().
+                                unwrap_or(&"No description".to_string()));
     }
 }
-
