@@ -1,16 +1,12 @@
 [package]
-name = "fayfee"
+name = "metisai"
 version = "0.1.0"
 edition = "2021"
-
-description = "Favorite feed generator"
-license = "MPL-2.0"
-authors = ["ElAmir"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-colour = "0.6.0"
-newsapi = {path = "./newsapi"}
-metisai = {path = "./metisai"}
+ureq = "2.4.0"
+serde_json = "1.0"
+serde = { version = "1.0", features = ["derive"] }
 dotenv = "0.15.0"

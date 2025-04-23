@@ -1,10 +1,14 @@
 use colour::{green, yellow};
 use newsapi::{get_articles, json_structs::Response};
+use metisai::{ai_message};
 use std::error::Error;
 
 fn main() -> Result<(), Box<dyn Error>> {
     let response = get_articles("Apple", "2025-04-20", "popularity")?;
-    render_articles(&response);
+    
+    let message = ai_message("Norouz is Iranian new year");
+
+    // render_articles(&response);
     Ok(())
 }
 
