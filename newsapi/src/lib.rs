@@ -1,38 +1,34 @@
 use serde_json;
 use ureq;
-use serde::Deserialize;
 use std::error::Error;
+use dotenv::dotenv;
 
-#[derive(Deserialize, Debug)]
-pub struct Response {
-    pub status: String,
-    #[serde(rename = "totalResults")]
-    pub total_results: u32,
-    pub articles: Vec<Article>,
-}
-  
-#[derive(Deserialize, Debug)]
-pub struct Article {
-    pub source: Source,
-    pub author: Option<String>,
-    pub title: String,
-    pub description: Option<String>,
-    pub url: String,
-    #[serde(rename = "urlToImage")]
-    pub url_to_image: Option<String>,
-    #[serde(rename = "publishedAt")]
-    pub published_at: String,
-    pub content: Option<String>,
-}
-  
-#[derive(Deserialize, Debug)]
-pub struct Source {
-    pub id: Option<String>,
-    pub name: String,
-}
+pub mod json_structs;
 
-pub fn get_articles(url: &str) -> Result<Response , Box<dyn Error>> {
-    let response_raw = ureq::get(url).call()?.into_string()?;
-    let response: Response = serde_json::from_str(&response_raw)?;
+pub fn get_articles(
+            query: &str, from: &str,
+            sort_by: &str
+        ) -> Result<json_structs::Response , Box<dyn Error>> {
+
+    //Load .env
+    dotenv().ok();
+
+    //Craft the url
+    let url = format!(
+        "{}?q={}&from={}&sortBy={}&apiKey={}",
+        std::env::var("API_ENDPOINT")?,
+        query,
+        from,
+        sort_by,
+        std::env::var("API_KEY")?
+    );
+    
+    //Get response
+    let response_raw = ureq::get(&url).call()?.into_string()?;
+
+    //Decode response
+    let response: json_structs::Response = serde_json::from_str(&response_raw)?;
+
+    //Return response
     Ok(response)
 }

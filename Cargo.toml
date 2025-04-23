@@ -1,9 +1,9 @@
 [package]
-name = "gcli"
+name = "fayfee"
 version = "0.1.0"
 edition = "2021"
 
-description = "ElAmir's first Rust app :)"
+description = "Favorite feed generator"
 license = "MPL-2.0"
 authors = ["ElAmir"]
 

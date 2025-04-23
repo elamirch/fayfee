@@ -1,21 +1,9 @@
 use colour::{green, yellow};
-use dotenv::dotenv;
-use newsapi::{get_articles, Response};
+use newsapi::{get_articles, json_structs::Response};
 use std::error::Error;
 
 fn main() -> Result<(), Box<dyn Error>> {
-    dotenv().ok();
-
-    let url = format!(
-        "{}?q={}&from={}&sortBy={}&apiKey={}",
-        std::env::var("API_ENDPOINT")?,
-        "Apple",
-        "2025-04-20",
-        "popularity",
-        std::env::var("API_KEY")?
-    );
-    println!("{}", url);
-    let response = get_articles(&url)?;
+    let response = get_articles("Apple", "2025-04-20", "popularity")?;
     render_articles(&response);
     Ok(())
 }
