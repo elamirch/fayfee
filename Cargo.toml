@@ -10,7 +10,7 @@ authors = ["ElAmir"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-colour = "0.6.0"
 newsapi = {path = "./newsapi"}
 metisai = {path = "./metisai"}
+telegramapi = {path = "./telegramapi"}
 dotenv = "0.15.0"
