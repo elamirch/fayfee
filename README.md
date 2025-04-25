@@ -2,6 +2,8 @@
 
 A simple Rust-based feed aggregator that fetches the latest headlines from [NewsAPI](https://newsapi.org/) and posts them to your Telegram channel. Future roadmap includes AI-powered interpretations of each article.
 
+Demo:  
+👉 [@TheElamite](https://t.me/theelamite)
 
 ## 🔧 Features
 
