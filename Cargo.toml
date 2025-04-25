@@ -14,3 +14,4 @@ newsapi = {path = "./newsapi"}
 metisai = {path = "./metisai"}
 telegramapi = {path = "./telegramapi"}
 dotenv = "0.15.0"
+chrono = "0.4"

@@ -1,15 +1,16 @@
 use newsapi::{get_articles};
 // use metisai::{ai_message};
 use telegramapi::{tg_message};
+use chrono::Local;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let categories = ["business", "technology", "health"];
+    let categories = ["technology", "health"];
+    let date = Local::now().date_naive().to_string();
 
     for category in categories.iter() {
-        let response = get_articles("2025-04-24", "relevancy", "en", category)?;
+        let response = get_articles(&date, "relevancy", "en", category)?;
         
         for article in &response.articles {
-            println!("Article...");
             let description = article
                                     .description
                                     .as_deref().unwrap_or("");
