@@ -24,8 +24,6 @@ pub fn get_articles(
         category
     );
 
-    println!("{:?}", &url);
-
     //Get response
     let response_raw = ureq::get(&url).call()?.into_string()?;
 
