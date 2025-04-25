@@ -37,8 +37,6 @@ pub fn ai_message(message: &str) -> Result<String, Box<dyn Error>> {
 
     let body = response?.into_string()?;
 
-    println!("Hey{}\n", body);
-
     let provider_output: json_structs::ProviderOutput = serde_json::from_str(&body)?;
 
     // 2. Extract exactly what you need

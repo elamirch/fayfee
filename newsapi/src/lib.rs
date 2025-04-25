@@ -6,23 +6,26 @@ use dotenv::dotenv;
 pub mod json_structs;
 
 pub fn get_articles(
-            query: &str, from: &str,
-            sort_by: &str
+            from: &str, sort_by: &str,
+            language: &str, category: &str
         ) -> Result<json_structs::Response , Box<dyn Error>> {
 
     //Load .env
     dotenv().ok();
-
+    
     //Craft the url
     let url = format!(
-        "{}?q={}&from={}&sortBy={}&apiKey={}",
-        std::env::var("API_ENDPOINT")?,
-        query,
+        "{}?from={}&sortBy={}&apiKey={}&language={}&category={}",
+        std::env::var("NEWSAPI_ENDPOINT")?,
         from,
         sort_by,
-        std::env::var("API_KEY")?
+        std::env::var("NEWSAPI_KEY")?,
+        language,
+        category
     );
-    
+
+    println!("{:?}", &url);
+
     //Get response
     let response_raw = ureq::get(&url).call()?.into_string()?;
 

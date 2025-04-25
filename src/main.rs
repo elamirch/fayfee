@@ -1,23 +1,34 @@
-use newsapi::{get_articles, json_structs::Response};
-use metisai::{ai_message};
+use newsapi::{get_articles};
+// use metisai::{ai_message};
 use telegramapi::{tg_message};
-use std::error::Error;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let response = get_articles("Iran", "2025-04-23", "popularity")?;
-    
-    //Check if the title is appropriate for the channel
-    let status = ai_message(article.title);
+    let categories = ["business", "technology", "health"];
 
-    for article in &response.articles {
-        if(status != "No") {
+    for category in categories.iter() {
+        let response = get_articles("2025-04-24", "relevancy", "en", category)?;
+        
+        for article in &response.articles {
+            println!("Article...");
+            let description = article
+                                    .description
+                                    .as_deref().unwrap_or("");
+            
+            // //Refine description
+            // let description = ai_message(description)?;
+
+            //Build the message
             let message = format!(
-                "{}\n\n{}\nSource: <a href=\"{}\">{}</a>",
+                "<b>{}</b>\n\n{}\n\nSource: <a href=\"{}\">{}</a> | #{}",
                 article.title,
-                article.description.as_ref().unwrap_or(&"".to_string()),
+                description,
                 article.url,
-                article.source.name
+                article.source.name,
+                category
             );
+
+            //Send the message to the Telegram channel
+            let _ = tg_message(message);
         }
     }
 
