@@ -2,7 +2,6 @@
 
 A simple Rust-based feed aggregator that fetches the latest headlines from [NewsAPI](https://newsapi.org/) and posts them to your Telegram channel. Future roadmap includes AI-powered interpretations of each article.
 
----
 
 ## 🔧 Features
 
@@ -11,7 +10,6 @@ A simple Rust-based feed aggregator that fetches the latest headlines from [News
 - 🛠️ Built-in library for AI-powered message interpretations (coming soon)
 - Easy cronjob setup for daily automation
 
----
 
 ## 🚀 Prerequisites
 
@@ -27,7 +25,6 @@ A simple Rust-based feed aggregator that fetches the latest headlines from [News
    - Sign up at [newsapi.org](https://newsapi.org/).  
    - Copy your **API Key**.
 
----
 
 ## ⚙️ Installation
 
@@ -37,7 +34,6 @@ cd fayfee
 cargo build --release
 ```
 
----
 
 ## 🔑 Configuration
 
@@ -67,7 +63,6 @@ TELEGRAM_CHANNEL_ID=your_channel_id_here
 3. Look for the `"chat":{"id": ...}` field.  
    - Channel IDs are negative integers, e.g. `-1001234567890`.
 
----
 
 ## 💡 Usage
 
@@ -86,7 +81,6 @@ Article being processed: some_article_title
 All articles sent!
 ```
 
----
 
 ## 🗓️ Automate with Cron
 
@@ -96,13 +90,11 @@ Add to your crontab to run daily (e.g. at 8 AM):
 0 8 * * * /path/to/fayfee --env-file /path/to/.env >> /var/log/fayfee.log 2>&1
 ```
 
----
 
 ## 🤖 AI-Powered Interpretations (Roadmap)
 
 We include a library (`metisai`) that will let you ask for custom interpretations of the news. Example usage (coming soon!):
 
----
 
 ## 📋 Roadmap
 
@@ -112,9 +104,7 @@ We include a library (`metisai`) that will let you ask for custom interpretation
 - [ ] Multi-source support (RSS, other APIs)  
 - [ ] Web dashboard & metrics
 
----
 
 ## 📝 License
 
-This project is distributed under the MIT License.  
-```
+This project is distributed under the MIT License.
