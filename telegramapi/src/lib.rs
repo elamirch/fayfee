@@ -8,7 +8,7 @@ pub fn tg_message(
     
     dotenv().ok();
     let token   = std::env::var("TELEGRAM_API")?;
-    let chat_id   = std::env::var("CHANNEL_ID")?;
+    let chat_id   = std::env::var("TELEGRAM_CHANNEL_ID")?;
 
     let url = format!("https://api.telegram.org/bot{}/sendMessage", token);
 
