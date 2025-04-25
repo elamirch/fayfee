@@ -4,8 +4,12 @@ use telegramapi::{tg_message};
 use chrono::Local;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
+    println!("FayFee is running...");
+
     let categories = ["technology", "health"];
     let date = Local::now().date_naive().to_string();
+
+    println!("Date: {}", date);
 
     for category in categories.iter() {
         let response = get_articles(&date, "relevancy", "en", category)?;
@@ -15,6 +19,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                                     .description
                                     .as_deref().unwrap_or("");
             
+            println!("Article being processed: {}", article.title);
+
             // //Refine description
             // let description = ai_message(description)?;
 
@@ -29,9 +35,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             );
 
             //Send the message to the Telegram channel
+            println!("Sending article to Telegram...");
             let _ = tg_message(message);
         }
     }
+
+    println!("All articles sent!");
 
     Ok(())
 }
